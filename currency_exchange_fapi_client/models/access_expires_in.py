@@ -23,11 +23,11 @@ from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
 from pydantic import Field
 
-EXPIRESIN_ANY_OF_SCHEMAS = ["int", "str"]
+ACCESSEXPIRESIN_ANY_OF_SCHEMAS = ["int", "str"]
 
-class ExpiresIn(BaseModel):
+class AccessExpiresIn(BaseModel):
     """
-    ExpiresIn
+    AccessExpiresIn
     """
 
     # data type: str
@@ -57,7 +57,7 @@ class ExpiresIn(BaseModel):
 
     @field_validator('actual_instance')
     def actual_instance_must_validate_anyof(cls, v):
-        instance = ExpiresIn.model_construct()
+        instance = AccessExpiresIn.model_construct()
         error_messages = []
         # validate data type: str
         try:
@@ -73,7 +73,7 @@ class ExpiresIn(BaseModel):
             error_messages.append(str(e))
         if error_messages:
             # no match
-            raise ValueError("No match found when setting the actual_instance in ExpiresIn with anyOf schemas: int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting the actual_instance in AccessExpiresIn with anyOf schemas: int, str. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -107,7 +107,7 @@ class ExpiresIn(BaseModel):
 
         if error_messages:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ExpiresIn with anyOf schemas: int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into AccessExpiresIn with anyOf schemas: int, str. Details: " + ", ".join(error_messages))
         else:
             return instance
 

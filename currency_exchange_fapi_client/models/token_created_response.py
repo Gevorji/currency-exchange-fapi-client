@@ -19,7 +19,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from currency_exchange_fapi_client.models.expires_in import ExpiresIn
+from currency_exchange_fapi_client.models.access_expires_in import AccessExpiresIn
+from currency_exchange_fapi_client.models.refresh_expires_in import RefreshExpiresIn
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,10 +30,11 @@ class TokenCreatedResponse(BaseModel):
     """ # noqa: E501
     access_token: StrictStr
     token_type: StrictStr
-    expires_in: ExpiresIn
+    access_expires_in: AccessExpiresIn
     refresh_token: Optional[StrictStr] = None
+    refresh_expires_in: Optional[RefreshExpiresIn]
     scope: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["access_token", "token_type", "expires_in", "refresh_token", "scope"]
+    __properties: ClassVar[List[str]] = ["access_token", "token_type", "access_expires_in", "refresh_token", "refresh_expires_in", "scope"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,13 +75,21 @@ class TokenCreatedResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of expires_in
-        if self.expires_in:
-            _dict['expires_in'] = self.expires_in.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of access_expires_in
+        if self.access_expires_in:
+            _dict['access_expires_in'] = self.access_expires_in.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of refresh_expires_in
+        if self.refresh_expires_in:
+            _dict['refresh_expires_in'] = self.refresh_expires_in.to_dict()
         # set to None if refresh_token (nullable) is None
         # and model_fields_set contains the field
         if self.refresh_token is None and "refresh_token" in self.model_fields_set:
             _dict['refresh_token'] = None
+
+        # set to None if refresh_expires_in (nullable) is None
+        # and model_fields_set contains the field
+        if self.refresh_expires_in is None and "refresh_expires_in" in self.model_fields_set:
+            _dict['refresh_expires_in'] = None
 
         # set to None if scope (nullable) is None
         # and model_fields_set contains the field
@@ -100,8 +110,9 @@ class TokenCreatedResponse(BaseModel):
         _obj = cls.model_validate({
             "access_token": obj.get("access_token"),
             "token_type": obj.get("token_type"),
-            "expires_in": ExpiresIn.from_dict(obj["expires_in"]) if obj.get("expires_in") is not None else None,
+            "access_expires_in": AccessExpiresIn.from_dict(obj["access_expires_in"]) if obj.get("access_expires_in") is not None else None,
             "refresh_token": obj.get("refresh_token"),
+            "refresh_expires_in": RefreshExpiresIn.from_dict(obj["refresh_expires_in"]) if obj.get("refresh_expires_in") is not None else None,
             "scope": obj.get("scope")
         })
         return _obj

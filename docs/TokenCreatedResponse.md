@@ -7,8 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **access_token** | **str** |  | 
 **token_type** | **str** |  | 
-**expires_in** | [**ExpiresIn**](ExpiresIn.md) |  | 
+**access_expires_in** | [**AccessExpiresIn**](AccessExpiresIn.md) |  | 
 **refresh_token** | **str** |  | [optional] 
+**refresh_expires_in** | [**RefreshExpiresIn**](RefreshExpiresIn.md) |  | 
 **scope** | **List[str]** |  | [optional] 
 
 ## Example
