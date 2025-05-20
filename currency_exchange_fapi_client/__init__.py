@@ -30,11 +30,12 @@ __all__ = [
     "ApiKeyError",
     "ApiAttributeError",
     "ApiException",
+    "AccessExpiresIn",
     "ConvertedCurrencySchema",
     "CurrencyOutSchema",
     "ExchangeRateOutSchema",
-    "ExpiresIn",
     "HTTPValidationError",
+    "RefreshExpiresIn",
     "TokenCreatedResponse",
     "TokensRevokedResponse",
     "TransitionUsersCategories",
@@ -63,11 +64,12 @@ from currency_exchange_fapi_client.exceptions import ApiAttributeError
 from currency_exchange_fapi_client.exceptions import ApiException
 
 # import models into sdk package
+from currency_exchange_fapi_client.models.access_expires_in import AccessExpiresIn
 from currency_exchange_fapi_client.models.converted_currency_schema import ConvertedCurrencySchema
 from currency_exchange_fapi_client.models.currency_out_schema import CurrencyOutSchema
 from currency_exchange_fapi_client.models.exchange_rate_out_schema import ExchangeRateOutSchema
-from currency_exchange_fapi_client.models.expires_in import ExpiresIn
 from currency_exchange_fapi_client.models.http_validation_error import HTTPValidationError
+from currency_exchange_fapi_client.models.refresh_expires_in import RefreshExpiresIn
 from currency_exchange_fapi_client.models.token_created_response import TokenCreatedResponse
 from currency_exchange_fapi_client.models.tokens_revoked_response import TokensRevokedResponse
 from currency_exchange_fapi_client.models.transition_users_categories import TransitionUsersCategories
